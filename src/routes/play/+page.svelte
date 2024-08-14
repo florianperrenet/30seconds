@@ -43,7 +43,7 @@
 	let pass_it_to_next_player = false;
 
 
-	const match_duration = 2;
+	const match_duration = 30;
 
 
 	function player_is_done() {
