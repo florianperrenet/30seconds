@@ -74,40 +74,40 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
+<section class="py-10">
+	<div class="max-w-md mx-auto px-4">
 
 
-	<div class="text-3xl mt-10 text-center font-semibold">Create teams</div>
+	<div class="text-3xl text-center font-semibold mb-4">Create teams</div>
 
-	<div class="pt-20 max-w-md mx-auto">
-		{#each teams as team, team_index}
-		<div class="border-b py-5">
-			<div class="text-xl font-semibold">Team {team.id}</div>
+	{#each teams as team, team_index}
+	<div class="border-b py-5">
+		<div class="text-xl font-semibold">Team {team.id}</div>
 
-			<div class="">
-				{#each team.players as player}
-					<div class="mt-3">
-						<input type="text" value={player} class="py-3 px-4 block w-full shadow-sm border border-gray-200 text-gray-900 rounded-md">
-					</div>
-				{/each}
-			</div>
-
-			<div>
-				<button on:click={() => add_player(team_index)} class="mt-3 py-2 text-white font-medium text-lg bg-blue-500/50 w-full">Add player</button>
-			</div>
+		<div class="">
+			{#each team.players as player}
+				<div class="mt-3">
+					<input type="text" bind:value={player} class="py-3 px-4 block w-full shadow-sm border border-gray-200 text-gray-900 rounded-md">
+				</div>
+			{/each}
 		</div>
-		{/each}
 
 		<div>
-			<button on:click={() => add_team()} class="mt-10 py-3 text-white font-medium text-lg px-3 bg-blue-500/50 w-full">Add team</button>
+			<button on:click={() => add_player(team_index)} class="mt-3 py-2 border font-medium text-lg bg-gray-200 w-full rounded-md">Add player</button>
 		</div>
 	</div>
+	{/each}
 
-	<div class="mx-10 mt-14">
-		<button on:click={() => ready()} class="py-3 text-white font-medium text-lg px-3 bg-blue-500 w-full">Ready</button>
+
+	<div class="">
+		<button on:click={() => add_team()} class="mt-5 py-3 text-white font-medium text-lg px-3 bg-sky-500 w-full rounded-md">Add team</button>
+	</div>
+
+	<div class="mt-5">
+		<button on:click={() => ready()} class="py-3 text-white font-medium text-lg px-3 bg-sky-700 w-full rounded-md">Ready!</button>
 	</div>
 
 
-
+	</div>
 </section>
 

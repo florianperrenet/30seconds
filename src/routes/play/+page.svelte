@@ -152,34 +152,35 @@
 </svelte:head>
 
 <section class="relative">
+		
 
 	{#if !(game_state === null)}
 
 	{#if time_is_up}
 		{#if select_correct_words}
 			{#if pass_it_to_next_player}
-				<div>
-					<div class="mt-20 text-3xl text-center font-semibold mt-5">Pass it on to {game_state.current_player}</div>
+				<div class="max-w-md px-5 py-20">
+					<div class="text-3xl text-center font-semibold mt-5">Pass it on to {game_state.current_player}</div>
 
-					<div class="max-w-md mx-auto">
-						<button on:click={() => phone_is_passed()} class="mt-10 py-3 text-white font-medium text-lg px-3 bg-blue-500 w-full">Next</button>
+					<div class="max-w-md mx-auto mt-10">
+						<button on:click={() => phone_is_passed()} class="py-3 text-white font-medium text-lg px-3 bg-sky-700 w-full rounded-md">Next</button>
 					</div>
 
-					<div class="mt-10 max-w-md mx-auto">
-						<div class="text-center text-lg">The score</div>
+					<div class="mt-20 max-w-md mx-auto">
+						<div class="text-center text-lg font-medium">The score</div>
 						<div class="mt-5">
 							<table class="w-full">
 								<thead>
-									<th></th>
-									<th class="font-medium text-sm">Round</th>
-									<th class="font-medium text-sm">Points</th>
+									<th class="py-2"></th>
+									<th class="py-2 font-medium text-sm">Round</th>
+									<th class="py-2 font-medium text-sm">Points</th>
 								</thead>
 								<tbody class="text-lg">
 									{#each game_state.teams as team, team_index}
 									<tr>
-										<td class="font-semibold">{team.name}</td>
-										<td class="text-center">{team.round}</td>
-										<td class="text-center">{team.points}</td>
+										<td class="border-y py-2 font-semibold">{team.name}</td>
+										<td class="border-y py-2 text-center">{team.round}</td>
+										<td class="border-y py-2 text-center">{team.points}</td>
 									</tr>
 									{/each}
 								</tbody>
@@ -191,12 +192,13 @@
 
 			<div class="fixed text-center w-full text-2xl pt-5">{game_state.current_team.name}</div>
 
-			<div class="h-screen flex justify-center items-center">
+
+			<div class="mx-5 h-screen flex justify-center items-center">
 				<div class="w-full">
-					<div class="mx-auto text-2xl space-y-5 max-w-sm text-center border border-2 rounded-md py-10 w-full mx-5 px-5">
+					<div class="mx-auto text-2xl space-y-6 max-w-sm text-center border border-2 rounded-md py-8 w-full mx-5 px-5">
 						{#each random_words as word, word_index}
 						<div class="flex items-center">
-							<input id={`checkbox-word-select-${word_index}`} type="checkbox" bind:checked={selected_words[word_index]}>
+							<input id={`checkbox-word-select-${word_index}`} type="checkbox" bind:checked={selected_words[word_index]} class="w-5 h-5 bg-gray-100 border-gray-300 rounded">
 							<label for={`checkbox-word-select-${word_index}`} class="ml-3">{word}</label>
 						</div>
 						{/each}
@@ -205,8 +207,8 @@
 			</div>
 
 			<div class="absolute bottom-0 left-0 w-full">
-				<div class="m-10">
-					<button on:click={() => correct_words_selected()} class="py-3 text-white font-medium text-lg px-3 bg-blue-500 w-full">Next</button>
+				<div class="m-10 mx-5">
+					<button on:click={() => correct_words_selected()} class="py-3 text-white font-medium text-lg px-3 bg-sky-700 w-full rounded-md">Next</button>
 				</div>
 			</div>
 			{/if}
@@ -219,13 +221,13 @@
 				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 				</svg>
 
-				<div class="text-3xl text-center font-semibold mt-5">Your time is up!</div>
+				<div class="text-4xl text-center font-semibold mt-5">Your time is up!</div>
 			</div>
 		</div>
 
 		<div class="absolute bottom-0 left-0 w-full">
-			<div class="m-10">
-				<button on:click={() => (select_correct_words = true)} class="py-3 text-white font-medium text-lg px-3 bg-blue-500 w-full">Next</button>
+			<div class="my-10 mx-5">
+				<button on:click={() => (select_correct_words = true)} class="py-3 text-white font-medium text-lg px-3 bg-sky-700 w-full rounded-md">Next</button>
 			</div>
 		</div>
 		{/if}
@@ -233,10 +235,13 @@
 
 	{:else}
 		{#if is_player_ready}
+		<div class="absolute top-0 left-0 w-full">
+			<div class={`${progress_percentage > 70 ? 'bg-orange-500' : 'bg-sky-700'} h-3`} style={`width: ${progress_percentage}%;`}></div>
+		</div>
 
-		<div class="relative h-screen flex justify-center items-center">
+		<div class="mx-5 relative h-screen flex justify-center items-center">
 			<div class="w-full">
-				<div class="mx-auto text-2xl space-y-5 max-w-sm text-center border border-2 rounded-md py-10 w-full mx-5">
+				<div class="mx-auto text-2xl space-y-6 max-w-sm text-center border border-2 rounded-md py-8 w-full mx-5">
 					{#each random_words as word}
 					<div>{word}</div>
 					{/each}
@@ -244,18 +249,15 @@
 			</div>
 		</div>
 
-		<div class="absolute bottom-0 left-0 w-full">
-			<div class="bg-blue-500 h-5" style={`width: ${progress_percentage}%;`}></div>
-		</div>
 		{:else}
 
-		<div class="">
+		<div>
 			<div class="fixed text-center w-full text-2xl pt-5">{game_state.current_team.name}</div>
 
 			<div class="h-screen flex items-center justify-center">
-				<div class="w-full px-10">
-					<div class="text-3xl text-center font-semibold">{game_state.current_player},<br/> are you ready?</div>
-					<button on:click={() => player_is_ready()} class="mt-10 py-3 text-white font-medium text-lg px-3 bg-blue-500 w-full">Next</button>
+				<div class="w-full px-5">
+					<div class="text-4xl text-center font-semibold">{game_state.current_player},<br/> are you ready?</div>
+					<button on:click={() => player_is_ready()} class="mt-10 py-3 text-white font-medium text-lg px-3 bg-sky-700 w-full rounded-md">Next</button>
 				</div>
 			</div>
 		</div>
