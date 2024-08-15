@@ -1,5 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+    import { base } from '$app/paths';
+
 
 	import { german_words } from '$lib/german_words.js';
 
@@ -90,7 +92,7 @@
 		localStorage.setItem("game_state", JSON.stringify(game_state));
 
 		// Navigate to /play
-		goto('play');
+		goto(base+'/play');
 
 	}
 
@@ -110,16 +112,16 @@
 	<div class="max-w-md mx-auto px-4">
 
 
-	<div class="text-3xl text-center text-white font-semibold mb-4">Create teams</div>
+	<div class="text-4xl text-center text-white font-semibold mb-4">Create teams</div>
 
 	{#each teams as team, team_index}
 	<div class="border-b py-5">
 		<div class="text-white text-xl font-semibold">Team {team.id}</div>
 
-		<div class="">
+		<div class="mt-3 divide-y rounded-md overflow-hidden">
 			{#each team.players as player}
-				<div class="mt-3">
-					<input type="text" bind:value={player} class="py-3 px-4 block w-full shadow-sm border border-gray-200 text-gray-900 rounded-md">
+				<div class="">
+					<input type="text" bind:value={player} class="py-3 px-4 block w-full text-gray-900">
 				</div>
 			{/each}
 		</div>

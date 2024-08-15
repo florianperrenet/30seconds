@@ -1,6 +1,8 @@
 <script>
 	import { german_words } from '$lib/german_words.js';
 	import { onMount } from 'svelte';
+    import { base } from '$app/paths';
+
 
 	let game_state = null;
 	let audio = null;
@@ -8,7 +10,7 @@
 
 	onMount(() => {
 		game_state = JSON.parse(localStorage.getItem("game_state"));
-		audio = new Audio('/30seconds/alarm-clock-sound.m4a');
+		audio = new Audio(base+'/alarm-clock-sound.m4a');
 	});
 
 
@@ -50,7 +52,7 @@
 	// let selected_words = [false, false, false, false, false];
 
 
-	const match_duration = 30;
+	const match_duration = 1;
 
 
 	function player_is_done() {
@@ -186,16 +188,19 @@
 						<div class="mt-5">
 							<table class="w-full">
 								<thead>
-									<th class="py-2"></th>
-									<th class="py-2 font-medium text-sm">Round</th>
-									<th class="py-2 font-medium text-sm">Points</th>
+									<th class="pr-2"></th>
+									<th class="p-2 font-medium text-sm">Round</th>
+									<th class="pl-2 font-medium text-sm">Points</th>
 								</thead>
 								<tbody class="text-lg">
 									{#each game_state.teams as team, team_index}
 									<tr>
-										<td class="border-y py-2 font-semibold">{team.name}</td>
-										<td class="border-y py-2 text-center">{team.round}</td>
-										<td class="border-y py-2 text-center">{team.points}</td>
+										<td class="border-t pt-2 pr-2 font-semibold">{team.name}</td>
+										<td rowspan="2" class="border-t pt-2 px-2 text-center">{team.round}</td>
+										<td rowspan="2" class="border-t pt-2 pl-2 text-center">{team.points}</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="text-sm text-gray-500 pt-1 pb-2 pr-2">{team.players.join(", ")}</td>
 									</tr>
 									{/each}
 								</tbody>
@@ -209,7 +214,7 @@
 				<div class="grid grid-cols-3 flex items-center">
 					<div></div>
 					<div>{game_state.current_team.name}</div>
-					<a class="ml-auto pr-5" href="/30seconds">
+					<a class="ml-auto pr-5" href="{base}/">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 						  <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
 						  <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -243,7 +248,7 @@
 			<div class="grid grid-cols-3 flex items-center">
 				<div></div>
 				<div>{game_state.current_team.name}</div>
-				<a class="ml-auto pr-5" href="/30seconds">
+				<a class="ml-auto pr-5" href="{base}/">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 					  <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
 					  <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -254,9 +259,7 @@
 
 		<div class="h-screen flex justify-center items-center text-white">
 			<div class="text-center">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-32 h-32 mx-auto">
-				  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-				</svg>
+				<img src="{base}/time_is_up.gif" alt="" class="max-w-xs">
 
 				<div class="text-4xl text-center font-semibold mt-5">Your time is up!</div>
 			</div>
@@ -293,7 +296,7 @@
 				<div class="grid grid-cols-3 flex items-center">
 					<div></div>
 					<div>{game_state.current_team.name}</div>
-					<a class="ml-auto pr-5" href="/30seconds">
+					<a class="ml-auto pr-5" href="{base}/">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
 						  <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />
 						  <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
@@ -304,7 +307,7 @@
 
 			<div class="h-screen flex items-center justify-center">
 				<div class="w-full px-5">
-					<div class="text-4xl text-center text-white font-semibold">{game_state.current_player},<br/> are you ready?</div>
+					<div class="text-4xl text-center text-white font-semibold leading-tight">{game_state.current_player},<br/> are you ready?</div>
 					<button on:click={() => player_is_ready()} class="mt-10 py-3 text-white font-medium text-lg px-3 bg-sky-600 w-full shadow-button rounded-md active:shadow-none">Next</button>
 				</div>
 			</div>
