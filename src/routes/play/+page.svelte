@@ -52,7 +52,7 @@
 	// let selected_words = [false, false, false, false, false];
 
 
-	const match_duration = 1;
+	const match_duration = process.env.NODE_ENV === 'production' ? 30 : 1;
 
 
 	function player_is_done() {
