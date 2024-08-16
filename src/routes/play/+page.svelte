@@ -16,6 +16,24 @@
 
 	let guess_state = null;
 
+	function getRandomGif() {
+		let gifs = [
+			"time_is_up_1.gif",
+			"time_is_up_2.gif",
+			"time_is_up_3.gif",
+			"time_is_up_4.gif",
+			"time_is_up_5.gif",
+			"time_is_up_6.gif",
+			"time_is_up_7.gif",
+			"time_is_up_8.gif",
+			"time_is_up_9.gif",
+			"time_is_up_10.webp",
+			"time_is_up_11.webp",
+			"time_is_up_12.webp",
+		];
+		return gifs[Math.floor(Math.random() * gifs.length)];
+	}
+
 
 
 	function getRandomItem(array) {
@@ -259,7 +277,7 @@
 
 		<div class="h-screen flex justify-center items-center text-white">
 			<div class="text-center">
-				<img src="{base}/time_is_up.gif" alt="" class="max-w-xs">
+				<img src="{base}/{getRandomGif()}" alt="" class="max-w-xs">
 
 				<div class="text-4xl text-center font-semibold mt-5">Your time is up!</div>
 			</div>
