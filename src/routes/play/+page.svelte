@@ -41,18 +41,24 @@
 		return array[Math.floor(Math.random() * array.length)];
 	}
 
+	function getRandomUniqueItems(array, count) {
+		const shuffled = [...array].sort(() => 0.5 - Math.random());
+		return shuffled.slice(0, count);
+	}
+
 	let random_words = [];
 
 
 
 	function set_random_words() {
-		random_words = [
-			getRandomItem(german_words),
-			getRandomItem(german_words),
-			getRandomItem(german_words),
-			getRandomItem(german_words),
-			getRandomItem(german_words),
-		];
+		// random_words = [
+		// 	getRandomItem(german_words),
+		// 	getRandomItem(german_words),
+		// 	getRandomItem(german_words),
+		// 	getRandomItem(german_words),
+		// 	getRandomItem(german_words),
+		// ];
+		random_words = getRandomUniqueItems(german_words, 5);
 	}
 
 	set_random_words();
