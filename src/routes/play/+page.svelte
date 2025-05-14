@@ -27,6 +27,7 @@
 			"time_is_up_7.gif",
 			"time_is_up_8.gif",
 			"time_is_up_9.gif",
+			"time_is_up_13.gif",
 			"time_is_up_10.webp",
 			"time_is_up_11.webp",
 			"time_is_up_12.webp",
@@ -277,7 +278,7 @@
 
 		<div class="h-screen flex justify-center items-center text-white">
 			<div class="text-center">
-				<img src="{base}/{getRandomGif()}" alt="" class="max-w-xs">
+				<img src="{base}/{getRandomGif()}" alt="" class="max-w-xs mx-auto">
 
 				<div class="text-4xl text-center font-semibold mt-5">Your time is up!</div>
 			</div>
