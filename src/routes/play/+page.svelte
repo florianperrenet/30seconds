@@ -28,6 +28,7 @@
 			"time_is_up_8.gif",
 			"time_is_up_9.gif",
 			"time_is_up_13.gif",
+			"time_is_up_14.gif",
 			"time_is_up_10.webp",
 			"time_is_up_11.webp",
 			"time_is_up_12.webp",
@@ -194,7 +195,7 @@
 </svelte:head>
 
 <section class="relative">
-		
+
 
 	{#if !(game_state === null)}
 

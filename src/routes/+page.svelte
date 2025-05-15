@@ -105,6 +105,7 @@
 	}
 
 	function ready() {
+    game_state.current_player = game_state.teams[0].players[0];
 		save_game_state();
 
 		// Navigate to /play
@@ -132,7 +133,7 @@
 
 	{#each game_state.teams as team, team_index}
 	<div class="border-b py-5">
-		<div class="text-white text-xl font-semibold flex items-center justify-between">Team {team.id} 
+		<div class="text-white text-xl font-semibold flex items-center justify-between">Team {team.id}
 
 			{#if team_index > 1}
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2 cursor-pointer text-gray-200" on:click={() => remove_team(team_index)}>
