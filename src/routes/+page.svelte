@@ -4,6 +4,9 @@
 	import { onMount } from 'svelte';
 
 	import { german_words } from '$lib/german_words.js';
+	import { dutch_words } from '$lib/dutch_words.js';
+
+	let selected_language = 'dutch';
 
 	let team_count = 2;
 	let player_count = 4;
@@ -41,6 +44,7 @@
 		pass_it_to_next_player: false,
 		progress_percentage: 0,
 		selected_words: [false, false, false, false, false],
+		language: 'dutch',
 	};
 
 	onMount(() => {
@@ -53,8 +57,17 @@
 				team.round = 0;
 				team.current_player_id = 0;
 			}
+			if (saved_game_state.language) {
+				selected_language = saved_game_state.language;
+				game_state.language = saved_game_state.language;
+			}
 		}
 	});
+
+	function on_language_change() {
+		game_state.language = selected_language;
+		save_game_state();
+	}
 
 	function add_player(team_index) {
 		++player_count;
@@ -130,6 +143,13 @@
 
 
 	<div class="text-4xl text-center text-white font-semibold mb-4">Create teams</div>
+
+	<div class="mb-4 rounded-md overflow-hidden">
+		<select bind:value={selected_language} on:change={on_language_change} class="py-3 px-4 block w-full text-gray-900 bg-white">
+			<option value="dutch">Dutch</option>
+			<option value="german">German</option>
+		</select>
+	</div>
 
 	{#each game_state.teams as team, team_index}
 	<div class="border-b py-5">

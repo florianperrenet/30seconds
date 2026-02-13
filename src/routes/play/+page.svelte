@@ -1,7 +1,16 @@
 <script>
 	import { german_words } from '$lib/german_words.js';
+	import { dutch_words } from '$lib/dutch_words.js';
 	import { onMount } from 'svelte';
     import { base } from '$app/paths';
+
+	function get_words() {
+		const saved = JSON.parse(localStorage.getItem("game_state"));
+		if (saved && saved.language === 'german') return german_words;
+		return dutch_words;
+	}
+
+	let words = get_words();
 
 
 	let game_state = null;
@@ -59,7 +68,7 @@
 		// 	getRandomItem(german_words),
 		// 	getRandomItem(german_words),
 		// ];
-		random_words = getRandomUniqueItems(german_words, 5);
+		random_words = getRandomUniqueItems(words, 5);
 	}
 
 	set_random_words();
